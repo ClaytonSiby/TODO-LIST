@@ -3,12 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Restaurant</title>
+  <title>To Do List</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   
 </head>
 <body>
   <div id="content"></div>
+
+  <div class="main-header">
+    <h2 class="header-title text-center mt-4 ">Create Your To Do List</h2>
+  </div>
+
+  <div class="container ">
+    <button id="add-list" class="btn btn-info text-center form-task"> Create a List</button>
+    <div class="add-task-form form-task">
+      <form id="task-details">
+        <div class="task-item">
+          <input type="text" class= "text-control" id="task-title" placeholder="add task title"/>
+        </div>
+        <div class="task-item">
+          <input type="text" class= "text-control" id="task-description" placeholder="add task description"/>
+        </div>
+        <div class="task-item">
+          <input type="date" class= "text-control" id="task-duedate"/>
+        </div>
+        <div class="task-item">
+          <input type="text" class= "text-control" id="task-notes" placeholder="add task notes"/>
+        </div>
+        <div class="task-item text-control">
+          <label for="">Choose task priority:</label>
+            <select id="task-priority" name="priority">
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>              
+            </select>
+        </div>
+        <div class="form-action">
+          <button type="submit" class="btn btn-success" id="submit-task">Add the List</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script src="https://kit.fontawesome.com/5b1eeceadd.js"></script>  
   <script src="main.js"></script>
 </body>
