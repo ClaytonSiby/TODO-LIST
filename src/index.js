@@ -9,6 +9,12 @@ function Task(title, description, duedate, notes, priority) {
 }
 
 let submitTask = document.getElementById('submit-task');
+let projectName = document.getElementById('project-name').value;
+let submitProject = document.getElementById('submit-project');
+
+function createProject() {
+  
+}
 
 function addTaskToProject(e) {
   e.preventDefault();
@@ -32,6 +38,5 @@ function addTaskToProject(e) {
   taskPriority.value = '';
   
 }
-
 
 submitTask.addEventListener('click', addTaskToProject);
