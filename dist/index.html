@@ -9,11 +9,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
   </head>
   <body>
-    <!-- <div id="content"></div>
-
-  <div class="main-header">
-    <h2 class="header-title text-center mt-4 ">Create Your To Do List</h2>
-  </div>
+    <!--  
 
   <div id="create-project" class="container">
     <form class="form-inline">
@@ -59,7 +55,7 @@
   </div> -->
 
     <!-- Button trigger modal -->
-    <div class="container" id="modal-wrapper">
+    <!-- <div class="container" id="modal-wrapper">
       <button
         type="button"
         class="btn btn-primary"
@@ -69,7 +65,7 @@
         Add Task
       </button>
 
-      <!-- Modal -->
+      
       <div
         class="modal fade"
         id="staticBackdrop"
@@ -148,7 +144,97 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+      <h1 class="title mt-4">Things I need to do</h1>
+      
+      <div class="all-tasks">
+        <h2 class="task-list-title">My Projects</h2>
+        <ul class="task-list"></ul>
+      
+        <form action="">
+          <input type="text" class="new list" placeholder="new list name" aria-label="new list name" />
+          <button class="btn create" aria-label="create new list">+</button>
+        </form>
+      </div>
+      
+      <div class="todo-list">
+        <div class="todo-header">
+          <h2 class="list-title"></h2>          
+        </div>
+      
+        <div class="todo-body">
+          <div class="tasks"></div>
+      
+          <div class="new-task-creator">
+            <div class="container" id="modal-wrapper">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Add Task
+              </button>
+            
+            
+              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Create Task</h5>
+                    </div>
+                    <div class="modal-body">
+                      <div class="add-task-form form-task">
+                        <form id="task-details">
+                          <div class="form-group task-item">
+                            <input type="text" class="form-control text-control" id="task-title" placeholder="add task title" />
+                          </div>
+                          <div class="form-group task-item">
+                            <input type="date" class="form-control text-control" id="task-duedate" />
+                          </div>
+                          <div class="form-group task-item">
+                            <input type="text" class="form-control text-control" id="task-notes" placeholder="add task notes" />
+                          </div>
+                          <div class="form-group">
+                            <textarea type="text" class="form-control" id="task-description"
+                              placeholder="add task description"></textarea>
+                          </div>
+                          <div class="form-group task-item text-control">
+                            <label for="">Choose task priority:</label>
+                            <select id="task-priority" name="priority" class="form-control">
+                              <option value="high">High</option>
+                              <option value="medium">Medium</option>
+                              <option value="low">Low</option>
+                            </select>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="submit" class="btn btn-success" id="submit-task">
+                        Add the Task
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      
+          <div class="delete-stuff">            
+            <button class="btn delete">Delete list</button>
+          </div>
+        </div>
+      </div>
+      
+      
+      </div>
+      <template id="task-template">
+        <div class="task">
+          <input type="checkbox" />
+          <label>
+            <span class="custom-checkbox"></span>
+          </label>
+        </div>
+      </template>
     <script src="https://kit.fontawesome.com/5b1eeceadd.js"></script>
     <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
