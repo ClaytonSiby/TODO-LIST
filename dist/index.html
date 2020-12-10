@@ -38,105 +38,10 @@
         <div class="tasks"></div>
 
         <div class="new-task-creator">
-          <div class="container" id="modal-wrapper">
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop"
-            >
-              Add Task
-            </button>
-
-            <div
-              class="modal fade"
-              id="staticBackdrop"
-              data-bs-backdrop="static"
-              data-bs-keyboard="false"
-              tabindex="-1"
-              aria-labelledby="staticBackdropLabel"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">
-                      Create Task
-                    </h5>
-                  </div>
-                  <div class="modal-body">
-                    <div class="add-task-form form-task">
-                      <form id="task-details">
-                        <div class="form-group task-item">
-                          <input
-                            type="text"
-                            class="form-control text-control"
-                            id="task-title"
-                            placeholder="add task title"
-                          />
-                        </div>
-                        <div class="form-group task-item">
-                          <input
-                            type="date"
-                            class="form-control text-control"
-                            id="task-duedate"
-                          />
-                        </div>
-                        <div class="form-group task-item">
-                          <input
-                            type="text"
-                            class="form-control text-control"
-                            id="task-notes"
-                            placeholder="add task notes"
-                          />
-                        </div>
-                        <div class="form-group">
-                          <textarea
-                            type="text"
-                            class="form-control"
-                            id="task-description"
-                            placeholder="add task description"
-                          ></textarea>
-                        </div>
-                        <div class="form-group task-item text-control">
-                          <label for="">Choose task priority:</label>
-                          <select
-                            id="task-priority"
-                            name="priority"
-                            class="form-control"
-                          >
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
-                          </select>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button
-                      type="button"
-                      class="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Close
-                    </button>
-                    <button
-                      type="submit"
-                      class="btn btn-success"
-                      id="submit-task"
-                    >
-                      Add the Task
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div class="delete-stuff">
             <button class="btn delete">Clear Completed Task</button>
-            <button class="btn delete">Delete list</button>
+            <button class="btn delete" data-delete-list-button>Delete list</button>
           </div>
         </div>
       </div>
