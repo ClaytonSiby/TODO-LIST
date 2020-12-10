@@ -136,6 +136,7 @@ body {
 
 .active-list {
   font-weight: 700;
+  color: rgb(216, 16, 235);
 }
 
 .todo-list {
