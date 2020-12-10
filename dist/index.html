@@ -33,7 +33,26 @@
 
       <div class="new-task-creator">
         <form action="" data-new-task-form>
-          <input type="text" data-new-task-input class="new task" placeholder="new task title" aria-label="new task name" />
+          <div class="form-group">
+            <input type="text" data-new-task-title class="new task form-control" placeholder="new task title" aria-label="new task name" />
+          </div>
+          <div class="form-group">
+            <input type="date" data-new-task-date class="new task form-control" aria-label="new task name" />
+          </div>
+
+          <div class="form-group">
+            <textarea data-new-task-description id="task-description" class="form-control" placeholder="Add short description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="priority-check">Select Priority</label>
+            <select id="priority-check" class="form-select form-control" data-select-priority>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          
           <button class="btn create" aria-label="create new task">Add </button>
         </form>
       </div>

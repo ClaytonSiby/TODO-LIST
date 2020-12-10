@@ -54,7 +54,10 @@ const tasksContainer = document.querySelector('[data-tasks]');
 const taskTemplate = document.getElementById('task-template');
 
 const newTaskForm = document.querySelector('[data-new-task-form]');
-const newTaskInput = document.querySelector('[data-new-task-input]');
+const newTaskInput = document.querySelector('[data-new-task-title]');
+const newTaskDate = document.querySelector('[data-new-task-date]');
+const newTaskDescription = document.querySelector('[data-new-task-description]');
+const newTaskPriority = document.querySelector('[data-select-priority]');
 const clearCompleteTasksButton = document.querySelector('[data-clear-complete-tasks-button]');
 
 const LOCAL_STORAGE_LIST_KEY = 'task.lists';
@@ -108,9 +111,16 @@ function createList(name) {
 newTaskForm.addEventListener('submit', e => {
   e.preventDefault();
   const taskName = newTaskInput.value;
-  if (taskName == null || taskName === '') return;
-  const task = createTask(taskName);
+  const taskDate = newTaskDate.value;
+  const taskDescription = newTaskDescription.value;
+  const taskPriority = newTaskPriority.value;
+
+  if (!(taskName || taskDate || taskDescription || taskPriority)) return;
+  const task = createTask(taskName, taskDate, taskDescription, taskPriority);
   newTaskInput.value = null;
+  newTaskDate.value = null;
+  newTaskDescription.value = null;
+  newTaskPriority.value = null;
 
   
   const selectedList = lists.find(list => list.id === selectedListId);
@@ -118,8 +128,8 @@ newTaskForm.addEventListener('submit', e => {
   saveAndRender();
 })
 
-function createTask(name) {
-  return { id: Date.now().toString(), name: name, complete: false }
+function createTask(name, date, description, priority) {
+  return { id: Date.now().toString(), name: name, date: date, description: description, priority: priority, complete: false }
 }
 
 function saveAndRender() {
@@ -156,6 +166,9 @@ function renderTasks(selectedList) {
     const label = taskElement.querySelector('label');
     label.htmlFor = task.id;
     label.append(task.name);
+    label.append(task.date);
+    label.append(task.description);
+    label.append(task.priority);
     tasksContainer.appendChild(taskElement);
   })
 }
