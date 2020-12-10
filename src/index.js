@@ -78,7 +78,7 @@ tasksContainer.addEventListener('click', e => {
     const selectedList = lists.find(list => list.id === selectedListId);
     const selectedTask = selectedList.tasks.find(task => task.id === e.target.id);
     selectedTask.complete = e.target.checked;
-    save();    
+    saveAndRender();    
   }
 })
 
@@ -104,8 +104,8 @@ newListForm.addEventListener('submit', e => {
   saveAndRender();
 })
 
-function createList(name) {
-  return { id: Date.now().toString(), name: name, tasks: [] }
+function createList() {
+  return { id: Date.now().toString(), name: newListInput.value, tasks: [] }
 }
 
 newTaskForm.addEventListener('submit', e => {
@@ -116,7 +116,7 @@ newTaskForm.addEventListener('submit', e => {
   const taskPriority = newTaskPriority.value;
 
   if (!(taskName || taskDate || taskDescription || taskPriority)) return;
-  const task = createTask(taskName, taskDate, taskDescription, taskPriority);
+  const task = createTask();
   newTaskInput.value = null;
   newTaskDate.value = null;
   newTaskDescription.value = null;
@@ -128,8 +128,15 @@ newTaskForm.addEventListener('submit', e => {
   saveAndRender();
 })
 
-function createTask(name, date, description, priority) {
-  return { id: Date.now().toString(), name: name, date: date, description: description, priority: priority, complete: false }
+function createTask() {
+  return {
+    id: Date.now().toString(),
+    name: newTaskInput.value,
+    date: newTaskDate.value,
+    priority: newTaskPriority.value,
+    description: newTaskDescription.value,
+    complete: false,
+  };
 }
 
 function saveAndRender() {
@@ -165,15 +172,39 @@ function renderTasks(selectedList) {
     checkbox.checked = task.complete;
     const label = taskElement.querySelector('label');
     label.htmlFor = task.id;
-    label.append(task.name);
-    label.append(task.date);
-    label.append(task.description);
+    
+    
+    label.append(task.name, ", ");
+    label.append(task.date, ", ");
+    label.append(task.description, ", ");
     label.append(task.priority);
+    
+    const editButton = document.createElement("p");
+    editButton.innerHTML = "Edit";
+    editButton.classList.add("edit");
+    editButton.addEventListener("click", () => editTask(task, label));
+    const todoTask = taskElement.querySelector(".task");
+    todoTask.append(editButton);
     tasksContainer.appendChild(taskElement);
   })
 }
 
+function editTask(task, label) {
 
+  newTaskInput.value = task.name;
+  newTaskDate.value = task.date;
+  newTaskPriority.value = task.priority;
+  newTaskDescription.value = task.description;
+
+  newTaskForm.addEventListener("submit", () => {    
+    task.name = newTaskInput.value;
+    task.date = newTaskDate.value;
+    task.priority = newTaskPriority.value;
+    task.description = newTaskDescription.value;
+    label.innerHTML = `${task.name}, ${task.date}, ${task.description}` ;
+    saveAndRender(); 
+  });
+}
 
 function renderLists() {
   lists.forEach(list => {

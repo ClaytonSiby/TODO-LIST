@@ -59,7 +59,7 @@ body {
 
 .btn.create {
   font-size: 1.5rem;
-  font-weight: 900;
+  font-weight: 400;
   margin-right: 0.25em;
   transition: opacity 250ms ease-in;
 }
@@ -265,4 +265,20 @@ body {
   left: 0;
   bottom: -35px;
   color: var(--clr-light);
+}
+
+.edit {
+  float: right;
+  font-size: 1rem;
+  padding: 0.5%;
+  transition: 0.3s ease;
+  cursor: pointer;
+  margin-top: -1%;
+  margin-right: -4%;
+  border: 1px solid black;
+  border-radius: 15%;
+}
+
+.edit:hover {
+  color: rgb(238, 237, 231);
 }
