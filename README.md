@@ -1,6 +1,6 @@
 # Project: To Do List
 
-This project is a To Do List created using Javascript and Webpack. An user can add multiple projects and add multiple tasks under each project. User can add task title, task description, duedate and set the priority of the tasks. User can also update the tasks as well as remove it. The project can be deleted as well.
+This is a To Do List created using Javascript and Webpack. An user can add multiple projects and add multiple tasks under each project. User can add task title, task description, duedate and set the priority of the tasks. User can also update the tasks as well as remove it. The project can be deleted as well.
 
 ## Landing page
 
@@ -26,7 +26,7 @@ git clone https://github.com/ClaytonSiby/TODO-LIST/tree/feature/todo-list-implem
 
 Once you have the cloned the project & you are still on the terminal, run:
 ```
-cd Library
+cd TODO-LIST
 ```
 
 And run the app on your local machine in the browser of your choice.
