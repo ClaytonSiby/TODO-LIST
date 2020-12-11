@@ -1,45 +1,4 @@
-// let defaultProject = [];
-
-// function Task(title, description, duedate, notes, priority) {   
-//   this.title = title;
-//   this.description = description;
-//   this.duedate = duedate; 
-//   this.notes = notes;
-//   this.priority = priority;
-// }
-
-// let submitTask = document.getElementById('submit-task');
-// let projectName = document.getElementById('project-name').value;
-// let submitProject = document.getElementById('submit-project');
-
-// function createProject() {
-  
-// }
-
-// function addTaskToProject(e) {
-//   e.preventDefault();
-//   let taskTitle = document.getElementById('task-title').value;
-//   let taskDescription = document.getElementById('task-description').value;
-//   let taskduedate = document.getElementById('task-duedate').value;
-//   let taskNotes = document.getElementById('task-notes').value;
-//   let taskPriority = document.getElementById('task-priority').value;
-
-//   let userTask = new Task(taskTitle, taskDescription, taskduedate, taskNotes, taskPriority);
-  
-//   defaultProject.push(userTask);
-
-//   localStorage.setItem('myTask', JSON.stringify(defaultProject));
-
-
-//   taskTitle.value = '';
-//   taskDescription.value = '';
-//   taskduedate.value = '';
-//   taskNotes.value = '';
-//   taskPriority.value = '';
-  
-// }
-
-// submitTask.addEventListener('click', addTaskToProject);
+import CreateObjects from './modules/objects';
 
 const listsContainer = document.querySelector('[data-lists]');
 const newListForm = document.querySelector('[data-new-list-form]');
@@ -98,15 +57,16 @@ newListForm.addEventListener('submit', e => {
   e.preventDefault()
   const listName = newListInput.value;
   if (listName == null || listName === '') return;
-  const list = createList(listName);
+  const list = CreateObjects.Project(listName);
   newListInput.value = null;
+  console.log(list.id);
   lists.push(list);
   saveAndRender();
 })
 
-function createList() {
-  return { id: Date.now().toString(), name: newListInput.value, tasks: [] }
-}
+// function createList() {
+//   return { id: Date.now().toString(), name: newListInput.value, tasks: [] }
+// }
 
 newTaskForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -116,7 +76,7 @@ newTaskForm.addEventListener('submit', e => {
   const taskPriority = newTaskPriority.value;
 
   if (!(taskName || taskDate || taskDescription || taskPriority)) return;
-  const task = createTask();
+  const task = CreateObjects.Task(taskName, taskDate, taskDescription, taskPriority);
   newTaskInput.value = null;
   newTaskDate.value = null;
   newTaskDescription.value = null;
@@ -124,20 +84,21 @@ newTaskForm.addEventListener('submit', e => {
 
   
   const selectedList = lists.find(list => list.id === selectedListId);
-  selectedList.tasks.push(task);
+  console.log(selectedList);
+  // selectedList.addNewTask(task);
   saveAndRender();
 })
 
-function createTask() {
-  return {
-    id: Date.now().toString(),
-    name: newTaskInput.value,
-    date: newTaskDate.value,
-    priority: newTaskPriority.value,
-    description: newTaskDescription.value,
-    complete: false,
-  };
-}
+// function createTask() {
+//   return {
+//     id: Date.now().toString(),
+//     name: newTaskInput.value,
+//     date: newTaskDate.value,
+//     priority: newTaskPriority.value,
+//     description: newTaskDescription.value,
+//     complete: false,
+//   };
+// }
 
 function saveAndRender() {
   save();
