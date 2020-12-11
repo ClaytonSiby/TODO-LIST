@@ -1,12 +1,14 @@
-import CreateObjects from './modules/objects';
+import './modules/Logic';
+import './modules/rendertasks';
+import './modules/saveandrender';
 
 const listsContainer = document.querySelector('[data-lists]');
 const newListForm = document.querySelector('[data-new-list-form]');
 const newListInput = document.querySelector('[data-new-list-input]');
 const deleteListButton = document.querySelector('[data-delete-list-button]');
 
-const listDisplayContainer = document.querySelector('[data-list-display-container]');
-const listTitleElement = document.querySelector('[data-list-title]')
+// const listDisplayContainer = document.querySelector('[data-list-display-container]');
+// const listTitleElement = document.querySelector('[data-list-title]')
 
 
 const tasksContainer = document.querySelector('[data-tasks]');
@@ -57,16 +59,15 @@ newListForm.addEventListener('submit', e => {
   e.preventDefault()
   const listName = newListInput.value;
   if (listName == null || listName === '') return;
-  const list = CreateObjects.Project(listName);
+  const list = createList();
   newListInput.value = null;
-  console.log(list.id);
   lists.push(list);
   saveAndRender();
 })
 
-// function createList() {
-//   return { id: Date.now().toString(), name: newListInput.value, tasks: [] }
-// }
+function createList() {
+  return { id: Date.now().toString(), name: newListInput.value, tasks: [] }
+}
 
 newTaskForm.addEventListener('submit', e => {
   e.preventDefault();
@@ -76,7 +77,7 @@ newTaskForm.addEventListener('submit', e => {
   const taskPriority = newTaskPriority.value;
 
   if (!(taskName || taskDate || taskDescription || taskPriority)) return;
-  const task = CreateObjects.Task(taskName, taskDate, taskDescription, taskPriority);
+  const task = createTask();
   newTaskInput.value = null;
   newTaskDate.value = null;
   newTaskDescription.value = null;
@@ -84,93 +85,92 @@ newTaskForm.addEventListener('submit', e => {
 
   
   const selectedList = lists.find(list => list.id === selectedListId);
-  console.log(selectedList);
-  // selectedList.addNewTask(task);
+  selectedList.tasks.push(task);
   saveAndRender();
 })
 
-// function createTask() {
-//   return {
-//     id: Date.now().toString(),
-//     name: newTaskInput.value,
-//     date: newTaskDate.value,
-//     priority: newTaskPriority.value,
-//     description: newTaskDescription.value,
-//     complete: false,
-//   };
+function createTask() {
+  return {
+    id: Date.now().toString(),
+    name: newTaskInput.value,
+    date: newTaskDate.value,
+    priority: newTaskPriority.value,
+    description: newTaskDescription.value,
+    complete: false,
+  };
+}
+
+// function saveAndRender() {
+//   save();
+//   render();
 // }
 
-function saveAndRender() {
-  save();
-  render();
-}
+// function save() {
+//   localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(lists));
+//   localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListId);
+// }
 
-function save() {
-  localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(lists));
-  localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListId);
-}
+// function render() {
+//   clearElement(listsContainer)
+//   renderLists();
 
-function render() {
-  clearElement(listsContainer)
-  renderLists();
+//   const selectedList = lists.find(list => list.id === selectedListId);
+//   if (selectedListId == null) {
+//     listDisplayContainer.style.display = 'none';
+//   } else {
+//     listDisplayContainer.style.display = '';
+//     listTitleElement.innerText = selectedList.name ;   
+//     clearElement(tasksContainer);
+//     renderTasks(selectedList);
+//   }
+// }
 
-  const selectedList = lists.find(list => list.id === selectedListId);
-  if (selectedListId == null) {
-    listDisplayContainer.style.display = 'none';
-  } else {
-    listDisplayContainer.style.display = '';
-    listTitleElement.innerText = selectedList.name ;   
-    clearElement(tasksContainer);
-    renderTasks(selectedList);
-  }
-}
-
-function renderTasks(selectedList) {
-  selectedList.tasks.forEach(task => {
-    if (task.id != null) {
-      const taskElement = document.importNode(taskTemplate.content, true);
-      const checkbox = taskElement.querySelector('input');
-      checkbox.id = task.id;
-      checkbox.checked = task.complete;
-      const label = taskElement.querySelector('label');
-      label.htmlFor = task.id;
+// function renderTasks(selectedList) {
+//   selectedList.tasks.forEach(task => {
+//     if (task.id != null) {
+//       const taskElement = document.importNode(taskTemplate.content, true);
+//       const checkbox = taskElement.querySelector('input');
+//       checkbox.id = task.id;
+//       checkbox.checked = task.complete;
+//       const label = taskElement.querySelector('label');
+//       label.htmlFor = task.id;
     
     
-      label.append(task.name, ", ");
-      label.append(task.date, ", ");
-      label.append(task.description, ", ");
-      label.append(task.priority);
+//       label.append(task.name, ", ");
+//       label.append(task.date, ", ");
+//       label.append(task.description, ", ");
+//       label.append(task.priority);
     
     
     
-      const editButton = document.createElement("p");
-      editButton.innerHTML = "Edit";
-      editButton.classList.add("edit");
-      editButton.addEventListener("click", () => editTask(task, label));
-      const todoTask = taskElement.querySelector(".task");
-      todoTask.append(editButton);
-      tasksContainer.appendChild(taskElement);
-    }
-  })
-}
+//       const editButton = document.createElement("p");
+//       editButton.innerHTML = "Edit";
+//       editButton.classList.add("edit");
+//       editButton.addEventListener("click", () => editTask(task, label));
+//       const todoTask = taskElement.querySelector(".task");
+//       todoTask.append(editButton);
+//       tasksContainer.appendChild(taskElement);
+//     }
+//   })
+// }
 
-function editTask(task, label) {
+// function editTask(task, label) {
 
-  newTaskInput.value = task.name;
-  newTaskDate.value = task.date;
-  newTaskPriority.value = task.priority;
-  newTaskDescription.value = task.description;
-  task.id = null;
+//   newTaskInput.value = task.name;
+//   newTaskDate.value = task.date;
+//   newTaskPriority.value = task.priority;
+//   newTaskDescription.value = task.description;
+//   task.id = null;
 
-  newTaskForm.addEventListener("submit", () => {    
-    task.name = newTaskInput.value;
-    task.date = newTaskDate.value;
-    task.priority = newTaskPriority.value;
-    task.description = newTaskDescription.value;
-    label.innerHTML = `${task.name}, ${task.date}, ${task.description}, ${task.priority}` ;
-    saveAndRender(); 
-  });
-}
+//   newTaskForm.addEventListener("submit", () => {    
+//     task.name = newTaskInput.value;
+//     task.date = newTaskDate.value;
+//     task.priority = newTaskPriority.value;
+//     task.description = newTaskDescription.value;
+//     label.innerHTML = `${task.name}, ${task.date}, ${task.description}, ${task.priority}` ;
+//     saveAndRender(); 
+//   });
+// }
 
 function renderLists() {
   lists.forEach(list => {
@@ -185,10 +185,10 @@ function renderLists() {
   })
 }
 
-function clearElement(element) {
-  while (element.firstChild) {
-    element.removeChild(element.firstChild);
-  }
-}
+// function clearElement(element) {
+//   while (element.firstChild) {
+//     element.removeChild(element.firstChild);
+//   }
+// }
 
 render();
