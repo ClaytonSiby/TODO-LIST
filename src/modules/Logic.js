@@ -1,6 +1,13 @@
-import './saveandrender';
+import {saveAndRender} from './saveandrender';
 
-export function editTask (task, label) {
+export const newTaskForm = document.querySelector('[data-new-task-form]');
+export const newTaskInput = document.querySelector('[data-new-task-title]');
+export const newTaskDate = document.querySelector('[data-new-task-date]');
+export const newTaskDescription = document.querySelector('[data-new-task-description]');
+export const newTaskPriority = document.querySelector('[data-select-priority]');
+
+
+function editTask (task, label) {
   newTaskInput.value = task.name
   newTaskDate.value = task.date
   newTaskPriority.value = task.priority
@@ -16,3 +23,5 @@ export function editTask (task, label) {
     saveAndRender()
   })
 }
+
+export {editTask};

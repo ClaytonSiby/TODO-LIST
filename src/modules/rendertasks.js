@@ -1,5 +1,8 @@
-import '../index';
-import './Logic';
+
+import {editTask} from './Logic';
+import {tasksContainer} from './saveandrender';
+
+const taskTemplate = document.getElementById('task-template');
 
 export function renderTasks (selectedList) {
   selectedList.tasks.forEach(task => {
@@ -32,3 +35,4 @@ export function clearElement (element) {
     element.removeChild(element.firstChild)
   }
 }
+
