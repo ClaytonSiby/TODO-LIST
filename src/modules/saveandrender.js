@@ -11,8 +11,8 @@ const listTitleElement = document.querySelector('[data-list-title]')
 export const listsContainer = document.querySelector('[data-lists]');
 export const tasksContainer = document.querySelector('[data-tasks]');
 
-export const lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
-export const selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
+export let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LIST_KEY)) || [];
+export let selectedListId = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY);
 
 export function save() {    
   localStorage.setItem(LOCAL_STORAGE_LIST_KEY, JSON.stringify(lists))
