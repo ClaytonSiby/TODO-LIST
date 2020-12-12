@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+  </head>
+  <body>
+    <h1 class="title mt-4">Things I need to do</h1>
+
+    <div class="all-tasks">
+      <h2 class="task-list-title">My Projects</h2>
+      <ul class="task-list" data-lists>
+        
+      </ul>
+
+      <form action="" data-new-list-form>
+        <input type="text" class="new list" data-new-list-input placeholder="new list name" aria-label="new list name"/>
+        <button class="btn create" aria-label="create new list">+</button>
+      </form>
+    </div>
+
+    <div class="todo-list" data-list-display-container>
+    <div class="todo-header">
+      <h2 class="list-title" data-list-title></h2>      
+    </div>
+
+    <div class="todo-body">
+      <div class="tasks" data-tasks></div>
+
+      <div class="new-task-creator">
+        <form action="" data-new-task-form>
+          <div class="form-group">
+            <input type="text" data-new-task-title class="new task form-control" placeholder="new task title" aria-label="new task name" />
+          </div>
+          <div class="form-group">
+            <input type="date" data-new-task-date class=" form-control" />
+          </div>
+
+          <div class="form-group">
+            <textarea data-new-task-description id="task-description" class="form-control" placeholder="Add short description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="priority-check">Select Priority</label>
+            <select id="priority-check" class="form-select form-control" data-select-priority>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          
+          <button class="btn create" aria-label="create new task">Add New Task</button>
+        </form>
+      </div>
+
+      <div class="delete-stuff">
+        <button class="btn delete" data-clear-complete-tasks-button>Clear completed tasks</button>
+        <button class="btn delete" data-delete-list-button>Delete list</button>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+  <template id="task-template">
+    <div class="task">
+      <input type="checkbox" />
+      <label>
+        <span class="custom-checkbox"></span>
+      </label>
+    </div>
+  </template>
+    <script src="https://kit.fontawesome.com/5b1eeceadd.js"></script>
+    <script defer src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
