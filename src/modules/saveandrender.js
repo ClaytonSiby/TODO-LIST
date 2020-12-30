@@ -62,15 +62,17 @@ export function saveAndRender() {
   render();
 }
 
-
-listsContainer.addEventListener('click', e => {
+if(listsContainer) {
+  listsContainer.addEventListener('click', e => {
   if (e.target.tagName.toLowerCase() === 'li') {
     selectedListId = e.target.dataset.listId;
     saveAndRender();
   }
 });
+}
 
-newListForm.addEventListener('submit', e => {
+if(newListForm) {
+  newListForm.addEventListener('submit', e => {
   e.preventDefault();
   const listName = newListInput.value;
   if (listName == null || listName === '') return;
@@ -79,10 +81,13 @@ newListForm.addEventListener('submit', e => {
   lists.push(list);
   saveAndRender();
 });
+}
 
-
-deleteListButton.addEventListener('click', e => {
+if(deleteListButton) {
+  deleteListButton.addEventListener('click', e => {
   lists = lists.filter(list => list.id !== selectedListId);
   selectedListId = null;
   saveAndRender();
 });
+}
+

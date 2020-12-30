@@ -17,6 +17,16 @@ module.exports = {
         test: /\.(png|svg|jpg|gif|jpeg)$/,
         use: ['file-loader'],
       },
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, 'src/'),
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
     ],
   },
 };
