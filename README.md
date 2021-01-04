@@ -31,6 +31,13 @@ cd TODO-LIST
 
 And run the app on your local machine in the browser of your choice.
 
+## Testing Setup
+
+1. - [] Open `Terminal` 
+2. - [] Run `cd TODO-LIST` to enter directory
+3. - [] Run `npm run test` to start testing
+4. - [] All test cases are successfully passed
+
 ## Authors
 
 👤 ABHIGYAN Mahanta
@@ -54,10 +61,4 @@ Feel free to check the [issues page](https://github.com/ClaytonSiby/TODO-LIST/is
 
 Give a :star:️ if you like this project!
 
-## Acknowledgments
 
-TBA
-
-## :memo: License
-
-TBA

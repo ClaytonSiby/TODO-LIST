@@ -24,9 +24,7 @@ export function save() {
   localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListId);
 }
 
-function createList() {
-  return { id: Date.now().toString(), name: newListInput.value, tasks: [] };
-}
+export const createList = (input, id) => ({ id, name: input, tasks: [] });
 
 
 export function renderLists() {
@@ -38,7 +36,9 @@ export function renderLists() {
     if (list.id === selectedListId) {
       listElement.classList.add('active-list');
     }
-    listsContainer.appendChild(listElement);
+    if (listsContainer) {
+      listsContainer.appendChild(listElement);
+    }
   });
 }
 
@@ -47,13 +47,15 @@ export function render() {
   renderLists();
 
   const selectedList = lists.find(list => list.id === selectedListId);
-  if (selectedListId == null) {
-    listDisplayContainer.style.display = 'none';
-  } else {
-    listDisplayContainer.style.display = '';
-    listTitleElement.innerText = selectedList.name;
-    clearElement(tasksContainer);
-    renderTasks(selectedList);
+  if (listDisplayContainer) {
+    if (selectedListId == null) {
+      listDisplayContainer.style.display = 'none';
+    } else {
+      listDisplayContainer.style.display = '';
+      listTitleElement.innerText = selectedList.name;
+      clearElement(tasksContainer);
+      renderTasks(selectedList);
+    }
   }
 }
 
@@ -62,27 +64,32 @@ export function saveAndRender() {
   render();
 }
 
+if (listsContainer) {
+  listsContainer.addEventListener('click', e => {
+    if (e.target.tagName.toLowerCase() === 'li') {
+      selectedListId = e.target.dataset.listId;
+      saveAndRender();
+    }
+  });
+}
 
-listsContainer.addEventListener('click', e => {
-  if (e.target.tagName.toLowerCase() === 'li') {
-    selectedListId = e.target.dataset.listId;
+if (newListForm) {
+  newListForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const listName = newListInput.value;
+    const id = Date.now().toString();
+    if (listName == null || listName === '') return;
+    const list = createList(listName, id);
+    newListInput.value = null;
+    lists.push(list);
     saveAndRender();
-  }
-});
+  });
+}
 
-newListForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const listName = newListInput.value;
-  if (listName == null || listName === '') return;
-  const list = createList();
-  newListInput.value = null;
-  lists.push(list);
-  saveAndRender();
-});
-
-
-deleteListButton.addEventListener('click', e => {
-  lists = lists.filter(list => list.id !== selectedListId);
-  selectedListId = null;
-  saveAndRender();
-});
+if (deleteListButton) {
+  deleteListButton.addEventListener('click', e => {
+    lists = lists.filter(list => list.id !== selectedListId);
+    selectedListId = null;
+    saveAndRender();
+  });
+}
