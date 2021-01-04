@@ -24,7 +24,7 @@ export function save() {
   localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListId);
 }
 
-function createList() {
+export function createList() {
   return { id: Date.now().toString(), name: newListInput.value, tasks: [] };
 }
 

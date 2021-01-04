@@ -3,10 +3,13 @@ import {
   render,
   lists,
   selectedListId,
-  tasksContainer,
+  createList,
 } from '../modules/saveandrender';
+
 jest.mock('../modules/saveandrender');
+
 
 test('Check the presence of task list', () => {
   expect(saveAndRender()).not.toBeNull();
 });
+
