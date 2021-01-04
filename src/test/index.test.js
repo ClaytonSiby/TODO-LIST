@@ -1,5 +1,10 @@
 import {createTask} from '../index'
 
+
+test('Check data is added to localStorage', () => {
+    expect(localStorage !== {}).toBe(true);
+});
+
 describe('Testing createTask function', () => {
   const project1 = createTask(1, 'task 1', '2020-12-24', 'medium','Description project 1',false);
   const project2 = createTask(2, 'task 2', '2020-12-26', 'high','Description project 2',false);
@@ -23,7 +28,5 @@ describe('Testing createTask function', () => {
   });
 });
 
-test('Check data is added to localStorage', () => {
-    expect(localStorage !== {}).toBe(true);
-});
+
 

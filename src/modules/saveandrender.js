@@ -38,7 +38,9 @@ export function renderLists() {
     if (list.id === selectedListId) {
       listElement.classList.add('active-list');
     }
+    if(listsContainer){
     listsContainer.appendChild(listElement);
+    }
   });
 }
 
@@ -47,13 +49,15 @@ export function render() {
   renderLists();
 
   const selectedList = lists.find(list => list.id === selectedListId);
-  if (selectedListId == null) {
-    listDisplayContainer.style.display = 'none';
-  } else {
-    listDisplayContainer.style.display = '';
-    listTitleElement.innerText = selectedList.name;
-    clearElement(tasksContainer);
-    renderTasks(selectedList);
+  if(listDisplayContainer){
+    if (selectedListId == null) {
+      listDisplayContainer.style.display = 'none';
+    } else {
+      listDisplayContainer.style.display = '';
+      listTitleElement.innerText = selectedList.name;
+      clearElement(tasksContainer);
+      renderTasks(selectedList);
+    }
   }
 }
 

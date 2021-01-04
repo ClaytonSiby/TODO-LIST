@@ -61,14 +61,15 @@ newTaskForm.addEventListener('submit', e => {
 });
 }
 
-const createTask = (id, name, date, priority, description, complete) => {
-
+export const createTask = (id, name, date, priority, description, complete) => {
+  if(newTaskInput || newTaskDate || newTaskPriority || newTaskDescription){
   id = Date.now().toString(),
   name = newTaskInput.value,
   date = newTaskDate.value,
   priority = newTaskPriority.value,
   description = newTaskDescription.value,
   complete = false
+  }
   return {
     id: id,
     name: name,
