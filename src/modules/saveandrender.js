@@ -24,9 +24,7 @@ export function save() {
   localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListId);
 }
 
-export const createList = (input, id) => {
-  return { id: id, name: input, tasks: [] };
-}
+export const createList = (input, id) => ({ id, name: input, tasks: [] });
 
 
 export function renderLists() {
@@ -38,8 +36,8 @@ export function renderLists() {
     if (list.id === selectedListId) {
       listElement.classList.add('active-list');
     }
-    if(listsContainer){
-    listsContainer.appendChild(listElement);
+    if (listsContainer) {
+      listsContainer.appendChild(listElement);
     }
   });
 }
@@ -49,7 +47,7 @@ export function render() {
   renderLists();
 
   const selectedList = lists.find(list => list.id === selectedListId);
-  if(listDisplayContainer){
+  if (listDisplayContainer) {
     if (selectedListId == null) {
       listDisplayContainer.style.display = 'none';
     } else {
@@ -66,33 +64,32 @@ export function saveAndRender() {
   render();
 }
 
-if(listsContainer) {
+if (listsContainer) {
   listsContainer.addEventListener('click', e => {
-  if (e.target.tagName.toLowerCase() === 'li') {
-    selectedListId = e.target.dataset.listId;
-    saveAndRender();
-  }
-});
+    if (e.target.tagName.toLowerCase() === 'li') {
+      selectedListId = e.target.dataset.listId;
+      saveAndRender();
+    }
+  });
 }
 
-if(newListForm) {
+if (newListForm) {
   newListForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const listName = newListInput.value;
-  const id = Date.now().toString()
-  if (listName == null || listName === '') return;
-  const list = createList(listName, id);
-  newListInput.value = null;
-  lists.push(list);
-  saveAndRender();
-});
+    e.preventDefault();
+    const listName = newListInput.value;
+    const id = Date.now().toString();
+    if (listName == null || listName === '') return;
+    const list = createList(listName, id);
+    newListInput.value = null;
+    lists.push(list);
+    saveAndRender();
+  });
 }
 
-if(deleteListButton) {
+if (deleteListButton) {
   deleteListButton.addEventListener('click', e => {
-  lists = lists.filter(list => list.id !== selectedListId);
-  selectedListId = null;
-  saveAndRender();
-});
+    lists = lists.filter(list => list.id !== selectedListId);
+    selectedListId = null;
+    saveAndRender();
+  });
 }
-

@@ -32,9 +32,9 @@ export function renderTasks(selectedList) {
 }
 
 export function clearElement(element) {
-  if(element) {
+  if (element) {
     while (element.firstChild) {
-    element.removeChild(element.firstChild);
+      element.removeChild(element.firstChild);
     }
   }
 }
