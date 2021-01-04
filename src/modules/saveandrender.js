@@ -24,8 +24,8 @@ export function save() {
   localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID_KEY, selectedListId);
 }
 
-export function createList() {
-  return { id: Date.now().toString(), name: newListInput.value, tasks: [] };
+export const createList = (input, id) => {
+  return { id: id, name: input, tasks: [] };
 }
 
 
@@ -79,8 +79,9 @@ if(newListForm) {
   newListForm.addEventListener('submit', e => {
   e.preventDefault();
   const listName = newListInput.value;
+  const id = Date.now().toString()
   if (listName == null || listName === '') return;
-  const list = createList();
+  const list = createList(listName, id);
   newListInput.value = null;
   lists.push(list);
   saveAndRender();
