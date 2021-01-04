@@ -61,14 +61,21 @@ newTaskForm.addEventListener('submit', e => {
 });
 }
 
-function createTask(id, name, date, priority, description, complete) {
+const createTask = (id, name, date, priority, description, complete) => {
+
+  id = Date.now().toString(),
+  name = newTaskInput.value,
+  date = newTaskDate.value,
+  priority = newTaskPriority.value,
+  description = newTaskDescription.value,
+  complete = false
   return {
-    id = Date.now().toString(),
-    name = newTaskInput.value,
-    date = newTaskDate.value,
-    priority = newTaskPriority.value,
-    description = newTaskDescription.value,
-    complete = false
+    id: id,
+    name: name,
+    date: date,
+    priority: priority,
+    description: description,
+    complete: complete
   };
 }
 
